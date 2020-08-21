@@ -1,4 +1,3 @@
-
 export interface Champion {
   blurb: string;
   id: string;
@@ -26,4 +25,22 @@ export interface Champion {
   tags: string[];
   title: string;
   version: string;
+}
+
+export interface Item {
+  name: string;
+  image: {
+    full: string;
+  };
+  gold: {
+    purchasable: boolean;
+    total: number;
+  };
+  tags: string[];
+  maps: {
+    [mapId: string]: boolean;
+  };
+  hideFromAll: boolean;
+  requiredChampion?: string;
+  requiredAlly?: string;
 }

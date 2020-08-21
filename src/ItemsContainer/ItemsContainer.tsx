@@ -2,24 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useObserver } from "mobx-react-lite";
 import { ShopkeeperContext } from "../ShopkeeperContext";
-
-interface Item {
-  name: string;
-  image: {
-    full: string;
-  };
-  gold: {
-    purchasable: boolean;
-    total: number;
-  };
-  tags: string[];
-  maps: {
-    [mapId: string]: boolean;
-  };
-  hideFromAll: boolean;
-  requiredChampion?: string;
-  requiredAlly?: string;
-}
+import { Item } from "../typings/Shopkeeper";
 
 interface ItemsData {
   [itemId: string]: Item;
@@ -75,6 +58,7 @@ function ItemsContainer() {
             key={itemId}
             src={`https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/img/item/${image.full}`}
             alt={name}
+            onClick={() => shopkeeperStore.addSelectedItem(items[itemId])}
           />
         );
       })}
