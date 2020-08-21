@@ -1,0 +1,11 @@
+.champion-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.champion-image {
+  height: 82px;
+  width: 82px;
+  border: 2px solid black;
+  position: relative;
+}
