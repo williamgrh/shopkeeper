@@ -45,7 +45,7 @@ export function ShopkeeperProvider(
           shopkeeperStore.selectedItems.splice(index, 1);
         }
         debugger;
-      }
+      },
     }),
     props
   );
