@@ -17,6 +17,10 @@ function ChampionDisplay({ champion }: ChampionDisplayProps) {
 
   const displayStats = ['hp', 'armor', 'spellblock', 'attackdamage', 'attackspeed', 'crit', 'hpregen', 'mp', 'mpregen'];
 
+  // Rounding methods
+  // hp always rounds up
+  // armor and MR round properly (check .5)
+
   return (
     <div>
       {champion.name}

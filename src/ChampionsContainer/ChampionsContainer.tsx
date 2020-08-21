@@ -4,7 +4,7 @@ import { useObserver } from "mobx-react-lite";
 import { ShopkeeperContext } from "../ShopkeeperContext";
 import { Champion } from "../typings/Shopkeeper";
 import ChampionDisplay from "./ChampionDisplay/ChampionDisplay";
-import ChampionsGrid from "./ChampionsGrid/ChampionsGrid";
+import ChampionsGridDrawer from "./ChampionsGridDrawer/ChampionsGridDrawer";
 import "./ChampionsContainer.css";
 
 interface ChampionsData {
@@ -25,17 +25,17 @@ function ChampionsContainer() {
 
   return useObserver(() => (
     <div className="champion-container">
-      {shopkeeperStore.selectedChampion && (
-        <ChampionDisplay
-          champion={champions[shopkeeperStore.selectedChampion]}
-        />
-      )}
-      <ChampionsGrid
+      <ChampionsGridDrawer
         champions={champions}
         onChampionClick={(champion) =>
           shopkeeperStore?.setSelectedChampion(champion)
         }
       />
+      {shopkeeperStore.selectedChampion && (
+        <ChampionDisplay
+          champion={champions[shopkeeperStore.selectedChampion]}
+        />
+      )}
     </div>
   ));
 }
