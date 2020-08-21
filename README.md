@@ -1,4 +1,4 @@
-## Shopkeeper App
+## shopkeeper.gg
 
 ### Feature Requests
 
