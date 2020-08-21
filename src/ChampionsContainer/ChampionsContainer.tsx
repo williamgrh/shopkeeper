@@ -3,7 +3,7 @@ import axios from "axios";
 import { useObserver } from "mobx-react-lite";
 import { ShopkeeperContext } from "../ShopkeeperContext";
 import { Champion } from "../typings/Shopkeeper";
-import ChampionDisplay from "./ChampionDisplay/ChampionDisplay";
+import LoadoutDisplay from "../LoadoutDisplay/LoadoutDisplay";
 import ChampionsGridDrawer from "./ChampionsGridDrawer/ChampionsGridDrawer";
 import "./ChampionsContainer.css";
 
@@ -32,7 +32,7 @@ function ChampionsContainer() {
         }
       />
       {shopkeeperStore.selectedChampion && (
-        <ChampionDisplay
+        <LoadoutDisplay
           champion={champions[shopkeeperStore.selectedChampion]}
         />
       )}

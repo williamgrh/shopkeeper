@@ -30,14 +30,6 @@ const hiddenItemsList = [
   "2422", // Slightly Magical Boots
   "2423", // Perfectly Timed Stopwatch
   "3042", // Muramana (duplicate)
-  "3850", // Spellthief's Edge
-  "3851", // Frostfang
-  "3854", // Steel Shoulderguards
-  "3855", // Runesteel Spaulders
-  "3858", // Relic Shield
-  "3859", // Targon's Buckler
-  "3862", // Spectral Sickle
-  "3863", // Harrowing Crescent
 ];
 
 function ItemsContainer() {
@@ -51,6 +43,8 @@ function ItemsContainer() {
       .then((res) => setItems(res.data.data));
   }, [shopkeeperStore]);
 
+  // TODO: filter in champ specific items when they're selected
+
   return useObserver(() => (
     <div>
       {Object.keys(items).map((itemId) => {
@@ -62,13 +56,11 @@ function ItemsContainer() {
           maps,
           hideFromAll,
           requiredChampion,
-          requiredAlly,
         } = items[itemId];
         if (
           hideFromAll ||
+          requiredChampion ||
           maps["11"] !== true ||
-          requiredChampion || // TODO: bring back for certain champs
-          requiredAlly || // ornn items?
           tags.includes("Consumable") || // TODO: elixirs
           tags.includes("Trinket") ||
           gold.total === 0 ||

@@ -18,7 +18,6 @@ function ChampionsGrid({
 }: InferProps<typeof ChampionsGrid.propTypes>) {
   const shopkeeperStore = useContext(ShopkeeperContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const btnRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const btnRef = useRef<HTMLDivElement>(null);
 
   return (

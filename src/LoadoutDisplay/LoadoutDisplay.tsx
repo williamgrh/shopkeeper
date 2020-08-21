@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Champion } from "../../typings/Shopkeeper";
-import { calculateGrowthStatistic } from "../../util/Shopkeeper";
+import { Champion } from "../typings/Shopkeeper";
+import { calculateGrowthStatistic } from "../util/Shopkeeper";
 import { Select } from "@chakra-ui/core";
 
 interface ChampionDisplayProps {
@@ -15,7 +15,8 @@ function ChampionDisplay({ champion }: ChampionDisplayProps) {
     levelOptions.push(<option value={i} key={i}>{i}</option>);
   }
 
-  const displayStats = ['hp', 'armor', 'spellblock', 'attackdamage', 'attackspeed', 'crit', 'hpregen', 'mp', 'mpregen'];
+  // TODO: attack damage
+  const displayStats = ['hp', 'armor', 'spellblock', 'attackdamage', 'crit', 'hpregen', 'mp', 'mpregen'];
 
   // Rounding methods
   // hp always rounds up
