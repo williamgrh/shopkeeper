@@ -46,7 +46,7 @@ function ItemsContainer() {
   useEffect(() => {
     axios
       .get(
-        `http://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/data/en_US/item.json`
+        `https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/data/en_US/item.json`
       )
       .then((res) => setItems(res.data.data));
   }, [shopkeeperStore]);
@@ -81,7 +81,7 @@ function ItemsContainer() {
         return (
           <img
             key={itemId}
-            src={`http://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/img/item/${image.full}`}
+            src={`https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/img/item/${image.full}`}
             alt={name}
           />
         );

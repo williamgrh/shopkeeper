@@ -17,7 +17,7 @@ function ChampionsGrid({
           <img
             className="champion-image"
             key={id}
-            src={`http://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/img/champion/${image.full}`}
+            src={`https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/img/champion/${image.full}`}
             alt={name}
             onClick={() => onChampionClick(id)}
           />

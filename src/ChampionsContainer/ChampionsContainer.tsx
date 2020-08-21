@@ -18,7 +18,7 @@ function ChampionsContainer() {
   useEffect(() => {
     axios
       .get(
-        `http://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/data/en_US/champion.json`
+        `https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/data/en_US/champion.json`
       )
       .then((res) => setChampions(res.data.data));
   }, [shopkeeperStore]);
