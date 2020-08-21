@@ -37,7 +37,7 @@ function StatsDisplay({ level, stats }: StatsDisplayProps) {
           <td>{calculateGrowthStatistic(stats.hp, stats.hpperlevel, level)}</td>
         </tr>
         {displayStats.map((stat) => (
-          <tr>
+          <tr key={stat}>
             <td>{stat}</td>
             <td>
               {calculateGrowthStatistic(

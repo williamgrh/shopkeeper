@@ -9,11 +9,12 @@ function ItemsDisplay() {
   return useObserver(() => (
     <>
       {
-        shopkeeperStore.selectedItems.map((item: Item) => (
+        shopkeeperStore.selectedItems.map((item: Item, index: number) => (
           <img
             key={item.name}
             src={`https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/img/item/${item.image.full}`}
             alt={item.name}
+            onClick={() => shopkeeperStore.removeSelectedItem(index)}
           /> 
         ))
       }

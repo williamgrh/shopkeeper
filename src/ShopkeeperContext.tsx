@@ -10,6 +10,7 @@ export type ShopKeeperStore = {
   setDataDragonVersion: (version: string) => void;
   setSelectedChampion: (champion: string) => void;
   addSelectedItem: (item: Item) => void;
+  removeSelectedItem: (index: number) => void;
 };
 
 export const ShopkeeperContext = createContext<any>(null);
@@ -38,6 +39,13 @@ export function ShopkeeperProvider(
           shopkeeperStore.selectedItems.push(item);
         }
       },
+
+      removeSelectedItem(index: number) {
+        if (index >= 0 && index < shopkeeperStore.selectedItems.length) {
+          shopkeeperStore.selectedItems.splice(index, 1);
+        }
+        debugger;
+      }
     }),
     props
   );
