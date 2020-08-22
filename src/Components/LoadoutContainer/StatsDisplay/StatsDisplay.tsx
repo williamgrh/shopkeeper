@@ -46,7 +46,14 @@ function StatsDisplay({ level, stats }: StatsDisplayProps) {
           {displayStats.map((stat: ChampionGrowthStatisticTypes) => (
             <tr key={stat}>
               <td>{stat}</td>
-              <td>{calculateFinalGrowthStatistic(stat, stats, level, shopkeeperStore.selectedItems)}</td>
+              <td>
+                {calculateFinalGrowthStatistic(
+                  stat,
+                  stats,
+                  level,
+                  shopkeeperStore.selectedItems
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

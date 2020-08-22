@@ -37,13 +37,7 @@ function ItemsContainer() {
   return useObserver(() => (
     <div>
       {Object.keys(items).map((itemId) => {
-        const {
-          name,
-          image,
-          maps,
-          consumed,
-          tags,
-        } = items[itemId];
+        const { name, image, maps, consumed, tags } = items[itemId];
 
         if (
           maps["11"] !== true ||
