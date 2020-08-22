@@ -1,5 +1,7 @@
 ## shopkeeper.gg
 
+https://shopkeeper.vercel.app/
+
 ### Feature Requests
 
 - [x] Champion can be selected and their statistics display
@@ -8,6 +10,7 @@
 - [ ] Display total item cost
 - [ ] List of passives given by selected items
 - [ ] Champion statistics round correctly
+- [ ] Fix attack speed calculation
 - [ ] Enable champion-specific items (e.g. Viktor's Hex Core)
 - [ ] Account for runes
 - [ ] Champion abilities properly affect statistics (e.g. Taric's Bastion)
