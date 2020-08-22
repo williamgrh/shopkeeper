@@ -13,7 +13,10 @@ https://shopkeeper.vercel.app/
 - [ ] Fix attack speed calculation
 - [ ] Enable champion-specific items (e.g. Viktor's Hex Core)
 - [ ] Account for runes
+- [ ] Item grid search/keyboard navigation
+- [ ] Champion grid search
 - [ ] Champion abilities properly affect statistics (e.g. Taric's Bastion)
+- [ ] Limit gold someone has and only show buyable items
 - [ ] Compare multiple loadouts and generate graphics
 - [ ] Import most common build(s) from op.gg/blitz/u.gg
 - [ ] Advise typical gold values based on level/game time

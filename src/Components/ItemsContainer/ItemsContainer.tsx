@@ -9,10 +9,16 @@ interface ItemsData {
 }
 
 const hiddenItemsList = [
-  "2420", // Stopwatch,
-  "2422", // Slightly Magical Boots
-  "2423", // Perfectly Timed Stopwatch
+  "2419", // Commencing Stopwatch
+  "2421", // Broken Stopwatch
+  "2424", // Broken Stopwatch
   "3042", // Muramana (duplicate)
+  "3599", // Black Spear
+  "3600", // Black Spear
+  "3671", // Enchantment: Warrior (boots)
+  "3672", // Enchantment: Cinderhulk (boots)
+  "3673", // Enchantment: Runic Echoes (boots)
+  "3675", // Enchantment: Bloodrazor (boots)
 ];
 
 function ItemsContainer() {
@@ -34,19 +40,16 @@ function ItemsContainer() {
         const {
           name,
           image,
-          gold,
-          tags,
           maps,
-          hideFromAll,
-          requiredChampion,
+          consumed,
+          tags,
         } = items[itemId];
+
         if (
-          hideFromAll ||
-          requiredChampion ||
           maps["11"] !== true ||
+          consumed === true ||
           tags.includes("Consumable") || // TODO: elixirs
-          tags.includes("Trinket") ||
-          gold.total === 0 ||
+          tags.includes("Trinket") || // TODO: elixirs
           name.includes("(Quick Charge)") ||
           hiddenItemsList.includes(itemId)
         ) {

@@ -145,5 +145,6 @@ export interface Item {
   hideFromAll: boolean;
   requiredChampion?: string;
   requiredAlly?: string;
+  consumed?: boolean;
   stats: { [key in ItemStatistic]: number };
 }
