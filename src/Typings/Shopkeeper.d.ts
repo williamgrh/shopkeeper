@@ -1,4 +1,4 @@
-const enum ChampionStatisticType {
+export const enum ChampionStatisticType {
   HealthPoints = "hp",
   ManaPoints = "mp",
   Armor = "armor",
