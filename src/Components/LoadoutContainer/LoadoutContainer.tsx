@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { useObserver } from "mobx-react-lite";
-import { ShopkeeperContext } from "../ShopkeeperContext";
+import { ShopkeeperContext } from "Context/ShopkeeperContext";
 import { Select } from "@chakra-ui/core";
-import StatsDisplay from "./StatsDisplay/StatsDisplay";
-import ItemsDisplay from "./ItemsDisplay/ItemsDisplay";
+import StatsDisplay from "Components/LoadoutContainer/StatsDisplay/StatsDisplay";
+import ItemsDisplay from "Components/LoadoutContainer/ItemsDisplay/ItemsDisplay";
 
 function LoadoutContainer() {
   const shopkeeperStore = useContext(ShopkeeperContext);

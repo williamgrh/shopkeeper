@@ -11,8 +11,8 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/core";
-import { ShopkeeperContext } from "../ShopkeeperContext";
-import { Champion } from "../typings/Shopkeeper";
+import { ShopkeeperContext } from "Context/ShopkeeperContext";
+import { Champion } from "Typings/Shopkeeper";
 import "./ChampionsContainer.css";
 
 interface ChampionsData {

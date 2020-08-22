@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ShopkeeperProvider } from "./ShopkeeperContext";
+import { ShopkeeperProvider } from "Context/ShopkeeperContext";
 import { ThemeProvider } from "@chakra-ui/core";
-import ShopkeeperContainer from "./ShopkeeperContainer/ShopkeeperContainer";
+import ShopkeeperContainer from "Components/ShopkeeperContainer/ShopkeeperContainer";
 
 const App = () => {
   const [dataDragonVersion, setDataDragonVersion] = useState<string>("");

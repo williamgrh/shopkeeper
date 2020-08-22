@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import PropTypes, { InferProps } from "prop-types";
 import { useLocalStore } from "mobx-react-lite";
-import { Champion, Item } from "./typings/Shopkeeper";
+import { Champion, Item } from "Typings/Shopkeeper";
 
 export type ShopKeeperStore = {
   dataDragonVersion: string;
@@ -44,7 +44,6 @@ export function ShopkeeperProvider(
         if (index >= 0 && index < shopkeeperStore.selectedItems.length) {
           shopkeeperStore.selectedItems.splice(index, 1);
         }
-        debugger;
       },
     }),
     props

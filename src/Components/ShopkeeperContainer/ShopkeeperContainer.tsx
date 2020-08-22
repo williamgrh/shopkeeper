@@ -1,7 +1,7 @@
 import React from "react";
-import LoadoutContainer from "../LoadoutContainer/LoadoutContainer";
-import ChampionsContainer from "../ChampionsContainer/ChampionsContainer";
-import ItemsContainer from "../ItemsContainer/ItemsContainer";
+import LoadoutContainer from "Components/LoadoutContainer/LoadoutContainer";
+import ChampionsContainer from "Components/ChampionsContainer/ChampionsContainer";
+import ItemsContainer from "Components/ItemsContainer/ItemsContainer";
 
 function ShopkeeperContainer() {
   return (

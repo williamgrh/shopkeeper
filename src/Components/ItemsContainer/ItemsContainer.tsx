@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useObserver } from "mobx-react-lite";
-import { ShopkeeperContext } from "../ShopkeeperContext";
-import { Item } from "../typings/Shopkeeper";
+import { ShopkeeperContext } from "Context/ShopkeeperContext";
+import { Item } from "Typings/Shopkeeper";
 
 interface ItemsData {
   [itemId: string]: Item;
