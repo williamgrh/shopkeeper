@@ -1,4 +1,38 @@
-import { ChampionStatistics, ChampionStatisticType, Item } from "Typings/Shopkeeper";
+import {
+  ChampionGrowthStatisticTypes,
+  ChampionGrowthStatisticRateTypes,
+  ChampionStatistics,
+  Item,
+} from "Typings/Shopkeeper";
+
+function getChampionGrowthStatisticRateTypeFromChampionGrowthStatisticType(
+  championStatisticType: ChampionGrowthStatisticTypes
+) {
+  const grothStatisticDict: {
+    [key in ChampionGrowthStatisticTypes]: ChampionGrowthStatisticRateTypes;
+  } = {
+    [ChampionGrowthStatisticTypes.HealthPoints]:
+      ChampionGrowthStatisticRateTypes.HealthPointsPerLevel,
+    [ChampionGrowthStatisticTypes.ManaPoints]:
+      ChampionGrowthStatisticRateTypes.ManaPointsPerLevel,
+    [ChampionGrowthStatisticTypes.Armor]:
+      ChampionGrowthStatisticRateTypes.ArmorPerLevel,
+    [ChampionGrowthStatisticTypes.MagicResist]:
+      ChampionGrowthStatisticRateTypes.MagicResistPerLevel,
+    [ChampionGrowthStatisticTypes.HealthPointsRegen]:
+      ChampionGrowthStatisticRateTypes.HealthPointsRegenPerLevel,
+    [ChampionGrowthStatisticTypes.ManaPointsRegen]:
+      ChampionGrowthStatisticRateTypes.ManaPointsRegenPerLevel,
+    [ChampionGrowthStatisticTypes.CriticalStrike]:
+      ChampionGrowthStatisticRateTypes.CriticalStrikePerLevel,
+    [ChampionGrowthStatisticTypes.AttackDamage]:
+      ChampionGrowthStatisticRateTypes.AttackDamagePerLevel,
+    [ChampionGrowthStatisticTypes.AttackSpeed]:
+      ChampionGrowthStatisticRateTypes.AttackSpeedPerLevel,
+  };
+
+  return grothStatisticDict[championStatisticType];
+}
 
 function calculateGrowthStatistic(
   baseValue: number,
@@ -11,24 +45,21 @@ function calculateGrowthStatistic(
   return b + g * (n - 1) * (0.7025 + 0.0175 * (n - 1));
 }
 
-export function calculateFinalStatistic(
-  statisticName: ChampionStatisticType,
+export function calculateFinalGrowthStatistic(
+  growthStatisticType: ChampionGrowthStatisticTypes,
   statistics: ChampionStatistics,
   championLevel: number,
   items: Array<Item>
 ): number {
-  // const finalStatistic = calculateGrowthStatistic(
-  //   statistics[statisticName],
-  //   statistics[`${statisticName}perlevel`],
-  //   championLevel
-  // );
+  const growthStatisticRateType = getChampionGrowthStatisticRateTypeFromChampionGrowthStatisticType(
+    growthStatisticType
+  );
 
-  // debugger;
+  const finalGrowthStatistic = calculateGrowthStatistic(
+    statistics[growthStatisticType],
+    statistics[growthStatisticRateType],
+    championLevel
+  );
 
-  // items.forEach((item: Item) => {
-  //   console.log(item)
-  // });
-
-  // return finalStatistic;#
-  return 0;
+  return finalGrowthStatistic;
 }

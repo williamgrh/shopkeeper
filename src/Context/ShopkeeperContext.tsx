@@ -36,7 +36,10 @@ export function ShopkeeperProvider(
 
       addSelectedItem(item: Item) {
         if (shopkeeperStore.selectedItems.length < 6) {
-          shopkeeperStore.selectedItems.push(item);
+          shopkeeperStore.selectedItems = [
+            ...shopkeeperStore.selectedItems,
+            item,
+          ];
         }
       },
 

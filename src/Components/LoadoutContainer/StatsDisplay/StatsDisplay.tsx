@@ -1,57 +1,58 @@
 import React, { useContext } from "react";
 import { useObserver } from "mobx-react-lite";
 import { ShopkeeperContext } from "Context/ShopkeeperContext";
-import { calculateFinalStatistic } from "Util/Shopkeeper";
-// import { ChampionStatisticType, ChampionStatistics } from "../../typings/Shopkeeper";
+import { calculateFinalGrowthStatistic } from "Util/Shopkeeper";
+import {
+  ChampionGrowthStatisticTypes,
+  ChampionStatistics,
+} from "Typings/Shopkeeper";
 
 interface StatsDisplayProps {
   level: number;
-  stats: {[key: string]: number};
+  stats: ChampionStatistics;
 }
 
 function StatsDisplay({ level, stats }: StatsDisplayProps) {
   const shopkeeperStore = useContext(ShopkeeperContext);
 
   // TODO: attack speed
-  // const displayStats: Array<ChampionStatisticType> = [
-  //   ChampionStatisticType.HealthPoints,
-  //   ChampionStatisticType.Armor,
-  //   ChampionStatisticType.MagicResist,
-  //   ChampionStatisticType.AttackDamage,
-  //   ChampionStatisticType.CriticalStrike,
-  //   ChampionStatisticType.HealthPointsRegen,
-  //   ChampionStatisticType.ManaPoints,
-  //   ChampionStatisticType.ManaPointsRegen,
-  // ];
+  const displayStats: Array<ChampionGrowthStatisticTypes> = [
+    ChampionGrowthStatisticTypes.HealthPoints,
+    ChampionGrowthStatisticTypes.Armor,
+    ChampionGrowthStatisticTypes.MagicResist,
+    ChampionGrowthStatisticTypes.AttackDamage,
+    ChampionGrowthStatisticTypes.CriticalStrike,
+    ChampionGrowthStatisticTypes.HealthPointsRegen,
+    ChampionGrowthStatisticTypes.ManaPoints,
+    ChampionGrowthStatisticTypes.ManaPointsRegen,
+  ];
 
   // Rounding methods
   // hp always rounds up
   // armor and MR round properly (check .5)
 
-  // const items = shopkeeperStore.selectedItems;
-  // const finalStats = displayStats.reduce((acc: any, statName: ChampionStatisticType) => {
-  //   return {
-  //     ...acc,
-  //     [statName]: calculateFinalStatistic(statName, stats, level, items),
-  //   };
-  // }, {});
+  return useObserver(() => {
+    if (shopkeeperStore.selectedItems.length > 0) {
+      console.log(shopkeeperStore.selectedItems[0].name);
+    }
 
-  return useObserver(() => (
-    <table>
-      <tbody>
-        <tr>
-          <td>level</td>
-          <td>{level}</td>
-        </tr>
-        {/* {Object.keys(finalStats).map((stat: string) => (
-          <tr key={stat}>
-            <td>{stat}</td>
-            <td>{finalStats[stat]}</td>
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <td>level</td>
+            <td>{level}</td>
           </tr>
-        ))} */}
-      </tbody>
-    </table>
-  ));
+          {displayStats.map((stat: ChampionGrowthStatisticTypes) => (
+            <tr key={stat}>
+              <td>{stat}</td>
+              <td>{calculateFinalGrowthStatistic(stat, stats, level, shopkeeperStore.selectedItems)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  });
 }
 
 export default StatsDisplay;
