@@ -3,6 +3,8 @@ import axios from "axios";
 import { ShopkeeperProvider } from "Context/ShopkeeperContext";
 import { ThemeProvider } from "@chakra-ui/core";
 import ShopkeeperContainer from "Components/ShopkeeperContainer/ShopkeeperContainer";
+import Footer from "Components/Footer/Footer";
+import "./index.css";
 
 const App = () => {
   const [dataDragonVersion, setDataDragonVersion] = useState<string>("");
@@ -17,7 +19,10 @@ const App = () => {
       {dataDragonVersion && (
         <ThemeProvider>
           <ShopkeeperProvider dataDragonVersion={dataDragonVersion}>
-            <ShopkeeperContainer />
+            <>
+              <ShopkeeperContainer />
+              <Footer />
+            </>
           </ShopkeeperProvider>
         </ThemeProvider>
       )}
