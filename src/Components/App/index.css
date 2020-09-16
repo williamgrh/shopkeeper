@@ -15,7 +15,7 @@ code {
 .app {
   position: relative;
   min-height: 100vh;
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
 
   --purple: #7400b8ff;
   --french-violet: #6930c3ff;
@@ -28,4 +28,3 @@ code {
   --turquoise: #72efddff;
   --aquamarine: #80ffdbff;
 }
-

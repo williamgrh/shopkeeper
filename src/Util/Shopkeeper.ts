@@ -45,6 +45,16 @@ function calculateGrowthStatistic(
   return b + g * (n - 1) * (0.7025 + 0.0175 * (n - 1));
 }
 
+function calculateStatisticWithItems(
+  growthStatisticType: ChampionGrowthStatisticTypes,
+  statistic: number,
+  items: Array<Item>
+): number {
+  console.log(items);
+  return statistic;
+}
+
+// TODO: fix regens, attack speed, and crit
 export function calculateFinalGrowthStatistic(
   growthStatisticType: ChampionGrowthStatisticTypes,
   statistics: ChampionStatistics,
@@ -55,11 +65,29 @@ export function calculateFinalGrowthStatistic(
     growthStatisticType
   );
 
-  const finalGrowthStatistic = calculateGrowthStatistic(
+  let growthStatistic = calculateGrowthStatistic(
     statistics[growthStatisticType],
     statistics[growthStatisticRateType],
     championLevel
   );
 
-  return finalGrowthStatistic;
+  growthStatistic = calculateStatisticWithItems(
+    growthStatisticType,
+    growthStatistic,
+    items
+  );
+
+  // account for various rounding methods and change regen stats from per 5 seconds to per 1 second
+  if (growthStatisticType === ChampionGrowthStatisticTypes.HealthPoints) {
+    growthStatistic = Math.ceil(growthStatistic);
+  } else if (
+    growthStatisticType === ChampionGrowthStatisticTypes.HealthPointsRegen ||
+    growthStatisticType === ChampionGrowthStatisticTypes.ManaPointsRegen
+  ) {
+    growthStatistic = Number((growthStatistic / 5).toFixed(1));
+  } else {
+    growthStatistic = Number(growthStatistic.toFixed(0));
+  }
+
+  return growthStatistic;
 }

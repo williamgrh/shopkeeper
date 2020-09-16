@@ -27,10 +27,6 @@ function StatsDisplay({ level, stats }: StatsDisplayProps) {
     ChampionGrowthStatisticTypes.ManaPointsRegen,
   ];
 
-  // Rounding methods
-  // hp always rounds up
-  // armor and MR round properly (check .5)
-
   return useObserver(() => {
     if (shopkeeperStore.selectedItems.length > 0) {
       console.log(shopkeeperStore.selectedItems[0].name);
