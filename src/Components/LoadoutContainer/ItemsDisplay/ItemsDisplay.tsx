@@ -1,23 +1,29 @@
-import React, { useContext } from "react";
-import { useObserver } from "mobx-react-lite";
-import { ShopkeeperContext } from "Context/ShopkeeperContext";
+import React from "react";
+import {
+  useShopkeeperState,
+  useShopkeeperDispatch,
+  ActionTypes,
+} from "Context/ShopkeeperContext";
 import { Item } from "Typings/Shopkeeper";
 
 function ItemsDisplay() {
-  const shopkeeperStore = useContext(ShopkeeperContext);
+  const { selectedItems, dataDragonVersion } = useShopkeeperState();
+  const dispatch = useShopkeeperDispatch();
 
-  return useObserver(() => (
+  return (
     <>
-      {shopkeeperStore.selectedItems.map((item: Item, index: number) => (
+      {selectedItems.map((item: Item, index: number) => (
         <img
           key={index}
-          src={`https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/img/item/${item.image.full}`}
+          src={`https://ddragon.leagueoflegends.com/cdn/${dataDragonVersion}/img/item/${item.image.full}`}
           alt={item.name}
-          onClick={() => shopkeeperStore.removeSelectedItem(index)}
+          onClick={() =>
+            dispatch({ type: ActionTypes.removeSelectedItem, payload: index })
+          }
         />
       ))}
     </>
-  ));
+  );
 }
 
 export default ItemsDisplay;

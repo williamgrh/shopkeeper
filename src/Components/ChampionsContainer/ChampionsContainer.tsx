@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React from "react";
 import axios from "axios";
-import { useObserver } from "mobx-react-lite";
 import {
   useDisclosure,
   Button,
@@ -11,7 +10,11 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/core";
-import { ShopkeeperContext } from "Context/ShopkeeperContext";
+import {
+  useShopkeeperState,
+  useShopkeeperDispatch,
+  ActionTypes,
+} from "Context/ShopkeeperContext";
 import { Champion } from "Typings/Shopkeeper";
 import "./ChampionsContainer.css";
 
@@ -20,20 +23,21 @@ interface ChampionsData {
 }
 
 function ChampionsContainer() {
-  const shopkeeperStore = useContext(ShopkeeperContext);
+  const { dataDragonVersion } = useShopkeeperState();
+  const dispatch = useShopkeeperDispatch();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef<HTMLDivElement>(null);
-  const [champions, setChampions] = useState<ChampionsData>({});
-  useEffect(() => {
+  const btnRef = React.useRef<HTMLDivElement>(null);
+  const [champions, setChampions] = React.useState<ChampionsData>({});
+  React.useEffect(() => {
     axios
       .get(
-        `https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/data/en_US/champion.json`
+        `https://ddragon.leagueoflegends.com/cdn/${dataDragonVersion}/data/en_US/champion.json`
       )
       .then((res) => setChampions(res.data.data));
-  }, [shopkeeperStore]);
+  }, [dataDragonVersion]);
 
-  return useObserver(() => (
+  return (
     <div className="champion-container">
       <Button ref={btnRef} variantColor="teal" onClick={onOpen}>
         Champions
@@ -57,10 +61,13 @@ function ChampionsContainer() {
                 <img
                   className="champion-image"
                   key={id}
-                  src={`https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/img/champion/${image.full}`}
+                  src={`https://ddragon.leagueoflegends.com/cdn/${dataDragonVersion}/img/champion/${image.full}`}
                   alt={name}
                   onClick={() => {
-                    shopkeeperStore.setSelectedChampion(champion);
+                    dispatch({
+                      type: ActionTypes.setSelectedChampion,
+                      payload: champion,
+                    });
                     onClose();
                   }}
                 />
@@ -70,7 +77,7 @@ function ChampionsContainer() {
         </DrawerContent>
       </Drawer>
     </div>
-  ));
+  );
 }
 
 export default ChampionsContainer;

@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
-import { useObserver } from "mobx-react-lite";
-import { ShopkeeperContext } from "Context/ShopkeeperContext";
+import React from "react";
+import { useShopkeeperState } from "Context/ShopkeeperContext";
 import { calculateFinalGrowthStatistic } from "Util/Shopkeeper";
 import {
   ChampionGrowthStatisticTypes,
@@ -13,7 +12,7 @@ interface StatsDisplayProps {
 }
 
 function StatsDisplay({ level, stats }: StatsDisplayProps) {
-  const shopkeeperStore = useContext(ShopkeeperContext);
+  const { selectedItems } = useShopkeeperState();
 
   // TODO: attack speed
   const displayStats: Array<ChampionGrowthStatisticTypes> = [
@@ -27,35 +26,24 @@ function StatsDisplay({ level, stats }: StatsDisplayProps) {
     ChampionGrowthStatisticTypes.ManaPointsRegen,
   ];
 
-  return useObserver(() => {
-    if (shopkeeperStore.selectedItems.length > 0) {
-      console.log(shopkeeperStore.selectedItems[0].name);
-    }
-
-    return (
-      <table>
-        <tbody>
-          <tr>
-            <td>level</td>
-            <td>{level}</td>
+  return (
+    <table>
+      <tbody>
+        <tr>
+          <td>level</td>
+          <td>{level}</td>
+        </tr>
+        {displayStats.map((stat: ChampionGrowthStatisticTypes) => (
+          <tr key={stat}>
+            <td>{stat}</td>
+            <td>
+              {calculateFinalGrowthStatistic(stat, stats, level, selectedItems)}
+            </td>
           </tr>
-          {displayStats.map((stat: ChampionGrowthStatisticTypes) => (
-            <tr key={stat}>
-              <td>{stat}</td>
-              <td>
-                {calculateFinalGrowthStatistic(
-                  stat,
-                  stats,
-                  level,
-                  shopkeeperStore.selectedItems
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  });
+        ))}
+      </tbody>
+    </table>
+  );
 }
 
 export default StatsDisplay;

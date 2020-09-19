@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import { ShopkeeperProvider } from "Context/ShopkeeperContext";
 import { ThemeProvider } from "@chakra-ui/core";
@@ -7,8 +7,8 @@ import Footer from "Components/Footer/Footer";
 import "./index.css";
 
 const App = () => {
-  const [dataDragonVersion, setDataDragonVersion] = useState<string>("");
-  useEffect(() => {
+  const [dataDragonVersion, setDataDragonVersion] = React.useState<string>("");
+  React.useEffect(() => {
     axios
       .get("https://ddragon.leagueoflegends.com/api/versions.json")
       .then((res) => setDataDragonVersion(res.data[0]));
@@ -21,9 +21,9 @@ const App = () => {
           <ShopkeeperProvider dataDragonVersion={dataDragonVersion}>
             <>
               <ShopkeeperContainer />
-              <Footer />
             </>
           </ShopkeeperProvider>
+          <Footer />
         </ThemeProvider>
       )}
     </div>

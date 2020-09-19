@@ -3,7 +3,17 @@ import {
   ChampionGrowthStatisticRateTypes,
   ChampionStatistics,
   Item,
+  ItemStatistic,
 } from "Typings/Shopkeeper";
+
+const statisticModificationByItemStatistic: {
+  [key: string]: (statisticValue: number, itemStatisticValue: number) => number;
+} = {
+  [ItemStatistic.FlatPhysicalDamageMod]: (
+    statisticValue: number,
+    itemStatisticValue: number
+  ) => statisticValue + itemStatisticValue,
+};
 
 function getChampionGrowthStatisticRateTypeFromChampionGrowthStatisticType(
   championStatisticType: ChampionGrowthStatisticTypes
@@ -47,47 +57,49 @@ function calculateGrowthStatistic(
 
 function calculateStatisticWithItems(
   growthStatisticType: ChampionGrowthStatisticTypes,
-  statistic: number,
-  items: Array<Item>
+  statisticValue: number,
+  items: readonly Item[]
 ): number {
-  console.log(items);
-  return statistic;
+  items.forEach((item) => {
+    Object.keys(item.stats).forEach((stat) => {});
+  });
+  return statisticValue;
 }
 
-// TODO: fix regens, attack speed, and crit
+// TODO: fix attack speed, and crit
 export function calculateFinalGrowthStatistic(
   growthStatisticType: ChampionGrowthStatisticTypes,
   statistics: ChampionStatistics,
   championLevel: number,
-  items: Array<Item>
+  items: readonly Item[]
 ): number {
   const growthStatisticRateType = getChampionGrowthStatisticRateTypeFromChampionGrowthStatisticType(
     growthStatisticType
   );
 
-  let growthStatistic = calculateGrowthStatistic(
+  let growthStatisticValue = calculateGrowthStatistic(
     statistics[growthStatisticType],
     statistics[growthStatisticRateType],
     championLevel
   );
 
-  growthStatistic = calculateStatisticWithItems(
+  growthStatisticValue = calculateStatisticWithItems(
     growthStatisticType,
-    growthStatistic,
+    growthStatisticValue,
     items
   );
 
   // account for various rounding methods and change regen stats from per 5 seconds to per 1 second
   if (growthStatisticType === ChampionGrowthStatisticTypes.HealthPoints) {
-    growthStatistic = Math.ceil(growthStatistic);
+    growthStatisticValue = Math.ceil(growthStatisticValue);
   } else if (
     growthStatisticType === ChampionGrowthStatisticTypes.HealthPointsRegen ||
     growthStatisticType === ChampionGrowthStatisticTypes.ManaPointsRegen
   ) {
-    growthStatistic = Number((growthStatistic / 5).toFixed(1));
+    growthStatisticValue = Number((growthStatisticValue / 5).toFixed(1));
   } else {
-    growthStatistic = Number(growthStatistic.toFixed(0));
+    growthStatisticValue = Number(growthStatisticValue.toFixed(0));
   }
 
-  return growthStatistic;
+  return growthStatisticValue;
 }

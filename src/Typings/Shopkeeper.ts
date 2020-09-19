@@ -124,7 +124,7 @@ export interface Champion {
   name: string;
   parttype: string;
   stats: ChampionStatistics;
-  tags: string[];
+  tags: readonly string[];
   title: string;
   version: string;
 }
@@ -138,7 +138,7 @@ export interface Item {
     purchasable: boolean;
     total: number;
   };
-  tags: string[];
+  tags: readonly string[];
   maps: {
     [mapId: string]: boolean;
   };

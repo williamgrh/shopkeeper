@@ -1,7 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
-import { useObserver } from "mobx-react-lite";
-import { ShopkeeperContext } from "Context/ShopkeeperContext";
+import {
+  useShopkeeperState,
+  useShopkeeperDispatch,
+  ActionTypes,
+} from "Context/ShopkeeperContext";
 import { Item } from "Typings/Shopkeeper";
 
 interface ItemsData {
@@ -22,19 +25,20 @@ const hiddenItemsList = [
 ];
 
 function ItemsContainer() {
-  const shopkeeperStore = useContext(ShopkeeperContext);
-  const [items, setItems] = useState<ItemsData>({});
-  useEffect(() => {
+  const { dataDragonVersion } = useShopkeeperState();
+  const dispatch = useShopkeeperDispatch();
+  const [items, setItems] = React.useState<ItemsData>({});
+  React.useEffect(() => {
     axios
       .get(
-        `https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/data/en_US/item.json`
+        `https://ddragon.leagueoflegends.com/cdn/${dataDragonVersion}/data/en_US/item.json`
       )
       .then((res) => setItems(res.data.data));
-  }, [shopkeeperStore]);
+  }, [dataDragonVersion]);
 
   // TODO: filter in champ specific items when they're selected
 
-  return useObserver(() => (
+  return (
     <div>
       {Object.keys(items).map((itemId) => {
         const { name, image, maps, consumed, tags } = items[itemId];
@@ -53,14 +57,19 @@ function ItemsContainer() {
         return (
           <img
             key={itemId}
-            src={`https://ddragon.leagueoflegends.com/cdn/${shopkeeperStore.dataDragonVersion}/img/item/${image.full}`}
+            src={`https://ddragon.leagueoflegends.com/cdn/${dataDragonVersion}/img/item/${image.full}`}
             alt={name}
-            onClick={() => shopkeeperStore.addSelectedItem(items[itemId])}
+            onClick={() =>
+              dispatch({
+                type: ActionTypes.addSelectedItem,
+                payload: items[itemId],
+              })
+            }
           />
         );
       })}
     </div>
-  ));
+  );
 }
 
 export default ItemsContainer;
