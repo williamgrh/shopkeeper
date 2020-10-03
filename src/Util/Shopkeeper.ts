@@ -6,15 +6,6 @@ import {
   ItemStatistic,
 } from "Typings/Shopkeeper";
 
-const statisticModificationByItemStatistic: {
-  [key: string]: (statisticValue: number, itemStatisticValue: number) => number;
-} = {
-  [ItemStatistic.FlatPhysicalDamageMod]: (
-    statisticValue: number,
-    itemStatisticValue: number
-  ) => statisticValue + itemStatisticValue,
-};
-
 function getChampionGrowthStatisticRateTypeFromChampionGrowthStatisticType(
   championStatisticType: ChampionGrowthStatisticTypes
 ) {
@@ -60,6 +51,9 @@ function calculateStatisticWithItems(
   statisticValue: number,
   items: readonly Item[]
 ): number {
+  // go through each item
+  // go through each stat
+  // if stat modifies target stat, apply it
   items.forEach((item) => {
     Object.keys(item.stats).forEach((stat) => {});
   });
